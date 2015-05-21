@@ -4,6 +4,7 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,19 +24,39 @@ public class Main extends JavaPlugin implements Listener{
 			@SuppressWarnings("deprecation")
 			@Override
 			public void run() {
-//e.getItemDrop().getLocation().getBlock().getRelative(0, -1, 0).setTypeIdAndData(35, (byte) 14, true);
-				e.getItemDrop().getLocation().getBlock().getRelative(0, -1, 0).setTypeIdAndData(152, (byte) 1, true);
-				e.getItemDrop().getLocation().getBlock().setTypeIdAndData(46, (byte) 1, true);
-				ItemStack casco = new ItemStack(Material.LEATHER_HELMET,1);
-				LeatherArmorMeta lam = (LeatherArmorMeta)casco.getItemMeta();
-				lam.setColor(Color.fromRGB(23, 0, 144));
-				casco.setItemMeta(lam);
-				for(Entity mob : e.getItemDrop().getNearbyEntities(10.0D, 10.0D, 10.0D))
-		    	{
-					if(mob instanceof Zombie){
-						((Zombie) mob).getEquipment().setHelmet(casco);
-					    ((LivingEntity) mob).getEquipment().setHelmet(casco);
-					}
-		    	}
-				e.getPlayer().getEquipment().setHelmet(casco);
+				ItemStack some = new ItemStack(Material.DIAMOND_BLOCK);
+				if(e.getItemDrop().getItemStack().isSimilar(some)){
+					e.getItemDrop().getLocation().getBlock().getRelative(0, -1, 0).setTypeIdAndData(35, (byte) 11, true);
+					//e.getItemDrop().getLocation().getBlock().getRelative(0, -1, 0).setTypeIdAndData(152, (byte) 1, true);
+					//e.getItemDrop().getLocation().getBlock().setTypeIdAndData(46, (byte) 1, true);
+					ItemStack casco = new ItemStack(Material.LEATHER_HELMET,1);
+					LeatherArmorMeta lam = (LeatherArmorMeta)casco.getItemMeta();
+					lam.setColor(Color.fromRGB(23, 0, 144));
+					casco.setItemMeta(lam);
+					for(Entity mob : e.getItemDrop().getNearbyEntities(2.0D, 2.0D, 2.0D))
+			    	{
+						if(mob instanceof Zombie || mob instanceof Player){
+						    ((LivingEntity) mob).getEquipment().setHelmet(casco);
+						    mob.setFireTicks(60);
+						}
+			    	}}
+				ItemStack some2 = new ItemStack(Material.REDSTONE_BLOCK);
+				if(e.getItemDrop().getItemStack().isSimilar(some2)){
+					e.getItemDrop().getLocation().getBlock().getRelative(0, -1, 0).setTypeIdAndData(35, (byte) 14, true);
+					//e.getItemDrop().getLocation().getBlock().getRelative(0, -1, 0).setTypeIdAndData(152, (byte) 1, true);
+					//e.getItemDrop().getLocation().getBlock().setTypeIdAndData(46, (byte) 1, true);
+					ItemStack casco = new ItemStack(Material.LEATHER_HELMET,1);
+					LeatherArmorMeta lam = (LeatherArmorMeta)casco.getItemMeta();
+					lam.setColor(Color.fromRGB(233, 0, 14));
+					casco.setItemMeta(lam);
+					for(Entity mob : e.getItemDrop().getNearbyEntities(2.0D, 2.0D, 2.0D))
+			    	{
+						if(mob instanceof Zombie || mob instanceof Player){
+						    ((LivingEntity) mob).getEquipment().setHelmet(casco);
+						    mob.setFireTicks(60);
+						}
+			    	}}
+					
+				
+				
 			}},25);}}
