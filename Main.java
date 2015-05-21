@@ -1,10 +1,10 @@
 package com.craftilandia.itemsguns;
 
-
-import java.util.ArrayList;
-
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -13,7 +13,6 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 public class Main extends JavaPlugin implements Listener{
-	ArrayList<String> droped = new ArrayList<String>();
 	@Override
 	public void onEnable() {getServer().getPluginManager().registerEvents(this, this);}
 	@EventHandler
@@ -31,6 +30,12 @@ public class Main extends JavaPlugin implements Listener{
 				LeatherArmorMeta lam = (LeatherArmorMeta)casco.getItemMeta();
 				lam.setColor(Color.fromRGB(23, 0, 144));
 				casco.setItemMeta(lam);
-				
+				for(Entity mob : e.getItemDrop().getNearbyEntities(10.0D, 10.0D, 10.0D))
+		    	{
+					if(mob instanceof Zombie){
+						((Zombie) mob).getEquipment().setHelmet(casco);
+					    ((LivingEntity) mob).getEquipment().setHelmet(casco);
+					}
+		    	}
 				e.getPlayer().getEquipment().setHelmet(casco);
 			}},25);}}
